@@ -9,6 +9,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.example.sainttropez"
+        vectorDrawables.useSupportLibrary = true
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
