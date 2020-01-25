@@ -17,6 +17,6 @@ class MainActivity : AppCompatActivity() {
         // JavaScriptを有効にする
         webView.settings.javaScriptEnabled = true
         // アプリ内のaasetsフォルダ先は「file//:android_asset/」でアクセスする
-        webView.loadUrl("file//:android_asset/html/index.html")
+        webView.loadUrl("file:///android_asset/html/index.html")
     }
 }
