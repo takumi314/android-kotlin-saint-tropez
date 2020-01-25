@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">SaintTropez</string>
+    <string name="top_text">TOP PAGE</string>
+    <string name="lunch01_text">エビフライと牛ロースステーキ</string>
+    <string name="lunch02_text">鶏の赤ワイン煮</string>
+    <string name="dinner01_text">海の幸コース</string>
+    <string name="dinner02_text">牛フィレ肉のセット</string>
 </resources>
