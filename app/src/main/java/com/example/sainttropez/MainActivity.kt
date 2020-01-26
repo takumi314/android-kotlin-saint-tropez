@@ -2,8 +2,10 @@ package com.example.sainttropez
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.ContextMenu
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -13,6 +15,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         // HTMLを表示する
         showHTML()
+        // コンテキストメニューを登録する
+        // - 登録したビューを長押しするとregisterForContextMenuをコールします
+        registerForContextMenu(webView)
     }
 
     // オプションメニューを初期化する
@@ -22,6 +27,29 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    // コンテキストメニューが表示される時にコールされる
+    override fun onCreateContextMenu(
+        menu: ContextMenu?,
+        v: View?,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        // メニューXMLファイルを、コンテキストメニューに表示する
+        menuInflater.inflate(R.menu.context, menu)
+    }
+
+    // コンテキストメニューが選択された時にコールされる
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.sms -> return true
+            R.id.mail -> return true
+            R.id.share -> return true
+            R.id.browse -> return true
+        }
+        return super.onContextItemSelected(item)
+    }
+
+    // オプションメニューが選択された時にコールされる
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
             R.id.top -> {
