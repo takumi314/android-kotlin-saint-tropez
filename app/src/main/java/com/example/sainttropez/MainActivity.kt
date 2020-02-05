@@ -126,14 +126,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // 文字列を共有する
     private fun openShareApp() {
-        val message = Uri.encode("ここに #コメント")
-        val intent = Intent(Intent.ACTION_VIEW)
-        val uri = Uri.parse("twitter://post?massage=$message")
-        intent.data = uri
-        startActivityForResult(intent, 1)
+        val text = "美味しいレストランを紹介します。"
+        val intent = Intent(Intent.ACTION_SEND)
+        // インテントのタイプを設定する
+        intent.type = "text/plain"
+        intent.putExtra(Intent.EXTRA_TEXT, text)    // 共有する文字列
+
+        // インテント対象が複数ある場合にアプリ選択画面を表示するインテントを作成する
+        // - target: アプリ選択画面の対象となるインテント
+        // - title: アプリ選択画面に表示するタイトル、設定しない場合はnullを渡します
+        val chooser = Intent.createChooser(intent, null)
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(chooser)
+        }
     }
 
+    // ブラウザでURLを開く
     private fun openBrowser() {
         val uri = Uri.parse("")
         val intent = Intent(Intent.ACTION_VIEW)
