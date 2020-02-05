@@ -145,13 +145,11 @@ class MainActivity : AppCompatActivity() {
 
     // ブラウザでURLを開く
     private fun openBrowser() {
-        val uri = Uri.parse("")
+        val url = "http://www.yahoo.co.jp/"
         val intent = Intent(Intent.ACTION_VIEW)
-        intent.data = uri
-        try {
+        intent.data = Uri.parse(url)    // ブラウザに渡すURL
+        if (intent.resolveActivity(packageManager) != null) {
             startActivity(intent)
-        } catch (e: Exception) {
-            print(e)
         }
     }
 
