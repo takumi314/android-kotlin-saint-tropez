@@ -98,6 +98,7 @@ class MainActivity : AppCompatActivity() {
         webView.loadUrl("file:///android_asset/html/index.html")
     }
 
+    // ショートメッセージを送る
     private fun openSMSApp() {
         val number = "111-1111-1111"
         val uri = Uri.parse("sms:$number")
@@ -107,18 +108,21 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    // メールアプリを起動する
     private fun openMailer() {
-        val address = "XXX@YYY.ZZZ"
-        val uri = Uri.parse("mailto:$address")
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.type = "text/plain"
+        val email = "nobody@example.com"
+        val subject = "予約問い合わせ"
+        val text = "以下のとおり予約を希望します。"
+        val uri = Uri.parse("mailto:")
+        val intent = Intent(Intent.ACTION_SENDTO)
         intent.data = uri
-        intent.putExtra(Intent.EXTRA_SUBJECT, "タイトル")
-        intent.putExtra(Intent.EXTRA_TEXT, "本文です。")
-        try {
+        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+            .putExtra(Intent.EXTRA_SUBJECT, subject)
+            .putExtra(Intent.EXTRA_TEXT, text)
+        // アプリが未インストールしていない場合のための処理
+        // - 処理できるアプリがないと呼び出しに失敗し、アプリが強制終了してしまうため
+        if (intent.resolveActivity(packageManager) != null) {
             startActivity(intent)
-        } catch (e: Exception) {
-            print(e)
         }
     }
 
