@@ -102,6 +102,7 @@ class MainActivity : AppCompatActivity() {
         val number = "111-1111-1111"
         val uri = Uri.parse("sms:$number")
         val intent = Intent(Intent.ACTION_VIEW)
+        intent.putExtra("sms_body", "こんにちは")    // 予めメッセージを入力することができる
         intent.data = uri
         startActivity(intent)
     }
